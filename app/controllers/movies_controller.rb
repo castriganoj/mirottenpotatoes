@@ -8,14 +8,20 @@ class MoviesController < ApplicationController
   end
 
   def index
+debugger
+	if params[:ratings].nil?
+		values = Hash[session[:ratings].map {|x| [x, '1']}]
+		  params[:ratings] = values
+	 	redirect_to movies_path(:ratings => params[:ratings])
+    end
+
 
 	sort = params[:order] 
 	checks = params[:ratings]
-	checks = checks.keys #holding the selected ratings
 
 	@checks = checks
 
-	@movies = Movie.order(sort).find(:all, :conditions => {:rating=>[checks]})
+	@movies = Movie.order(sort).find(:all, :conditions => {:rating=>[checks.keys]})
 	
 	@color_re = 'hilite' if sort == 'release_date'
 	@color_sort = 'hilite'if sort == 'title'
