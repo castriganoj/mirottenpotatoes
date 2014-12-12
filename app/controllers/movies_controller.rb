@@ -10,13 +10,9 @@ class MoviesController < ApplicationController
   def index
 
 	if params[:ratings].nil?
-
 		values = Hash[Movie.ratings.map {|x| [x, '1']}]
 		  ratings = values
-debugger
 	 	 params[:ratings]= ratings 
-
-
    end
 
 
