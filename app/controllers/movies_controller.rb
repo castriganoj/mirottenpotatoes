@@ -8,12 +8,19 @@ class MoviesController < ApplicationController
   end
 
   def index
-debugger
+
 	if params[:ratings].nil?
-		values = Hash[session[:ratings].map {|x| [x, '1']}]
-		  params[:ratings] = values
-	 	redirect_to movies_path(:ratings => params[:ratings])
-    end
+
+		values = Hash[Movie.ratings.map {|x| [x, '1']}]
+		  ratings = values
+debugger
+	 	 params[:ratings]= ratings 
+
+
+   end
+
+
+#) Hash[x.map {|x| [x, '1']}]
 
 
 	sort = params[:order] 
